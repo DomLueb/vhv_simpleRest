@@ -1,3 +1,9 @@
-#server:
-#  error:
-#    include-stacktrace: never
+server:
+  error:
+    include-stacktrace: never
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://koch-logistikshop.dev.lmis.de/auth/realms/Koch
