@@ -1,11 +1,13 @@
 package de.lmis.vhv.simplerest.api;
 
 import de.lmis.vhv.simplerest.business.PersonService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +21,10 @@ public class PersonController {
     }
 
     @GetMapping
+    @RolesAllowed("ADMIN")
     public List<PersonDTO> getAllPersons() {
+        var con=SecurityContextHolder.getContext();
+        var a=con.getAuthentication().getPrincipal();
         var persons = this.personService.getAllPersons();
         return persons.stream().map(p -> PersonDTO.builder()
                 .fn(p.getFirstName()).ln(p.getLastName()).build())

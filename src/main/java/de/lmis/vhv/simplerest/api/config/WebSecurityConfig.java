@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
-    private static final String CLIENT_ID="demoC";
+    private static final String CLIENT_ID="vertrags-ui";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,8 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
                 .and()
+
                 .oauth2ResourceServer()
                 .jwt()
                 .jwtAuthenticationConverter(this::extractAuthorities);

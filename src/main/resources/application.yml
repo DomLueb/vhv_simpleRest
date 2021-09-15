@@ -6,4 +6,4 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://koch-logistikshop.dev.lmis.de/auth/realms/Koch
+          issuer-uri: https://koch-logistikshop.dev.lmis.de/auth/realms/vhv
