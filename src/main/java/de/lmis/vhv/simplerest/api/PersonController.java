@@ -13,25 +13,23 @@ import java.util.stream.Collectors;
 @RequestMapping("/persons")
 public class PersonController {
     private final PersonService personService;
+    private final PersonMapper personMapper;
 
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, PersonMapper personMapper) {
         this.personService = personService;
+        this.personMapper = personMapper;
     }
 
     @GetMapping
     public List<PersonDTO> getAllPersons() {
         var persons = this.personService.getAllPersons();
-        return persons.stream().map(p -> PersonDTO.builder()
-                .fn(p.getFirstName()).ln(p.getLastName()).build())
+        return persons.stream().map(this.personMapper::map)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{lastName}")
     public PersonDTO getPerson(@PathVariable String lastName) {
         var person=this.personService.getPersonByLastName(lastName);
-        return PersonDTO.builder()
-                .fn(person.getFirstName())
-                .ln(person.getLastName())
-                .build();
+        return this.personMapper.map(person);
     }
 }

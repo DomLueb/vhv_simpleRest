@@ -8,18 +8,22 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
+@Import(value = {PersonMapperImpl.class})
 class PersonControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -35,11 +39,15 @@ class PersonControllerTest {
         this.mockMvc.perform(
                         get("/persons"))
                 .andDo(print())
-                .andExpect(status().isOk());
-        // TODO: compare result with expectation
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{\"fn\":\"FN\",\"ln\":\"LN\"}]"));
     }
 
     private Person getDemoPerson() {
-        return Person.builder().firstName("FN").lastName("LN").build();
+        return Person.builder()
+                .firstName("FN")
+                .lastName("LN")
+                .password("encryptedPassword")
+                .build();
     }
 }
