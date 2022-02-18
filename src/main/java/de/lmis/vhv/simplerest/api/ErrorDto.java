@@ -1,9 +1,12 @@
 package de.lmis.vhv.simplerest.api;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Value;
 
-@Data
+@Value
+@Builder
 public class ErrorDto {
-    private String message;
-    private String errorCode;
+    String message;
+    String errorCode;
 }

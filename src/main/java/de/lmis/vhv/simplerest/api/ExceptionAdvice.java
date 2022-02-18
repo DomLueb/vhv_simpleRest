@@ -11,9 +11,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(PersonNotFoundException.class)
     public ResponseEntity<ErrorDto> handlePersonNotFoundException(PersonNotFoundException exception) {
-        var errorDto = new ErrorDto();
-        errorDto.setErrorCode("PERSON_NOT_FOUND_CODE");
-        errorDto.setMessage(exception.getMessage());
+        var errorDto = ErrorDto.builder()
+                .errorCode("PERSON_NOT_FOUND_CODE")
+                .message(exception.getMessage())
+                .build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDto);
     }
 }

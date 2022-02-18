@@ -11,7 +11,7 @@ public class PersonRepo {
     private List<Person> allPersons= List.of(
             Person.builder().firstName("Dominik").lastName("Lübbers").build(),
             Person.builder().firstName("Marco").lastName("Barenkamp").build(),
-            Person.builder().firstName("Angela").lastName("Merkel").build());
+            Person.builder().firstName("Olaf").lastName("Scholz").build());
 
     public List<Person> getAllPersons() {
         return allPersons;
