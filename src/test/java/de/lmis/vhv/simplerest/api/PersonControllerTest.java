@@ -36,7 +36,7 @@ class PersonControllerTest {
                         get("/persons"))
                 .andDo(print())
                 .andExpect(status().isOk());
-        // TODO: compare result with exceptation
+        // TODO: compare result with expectation
     }
 
     private Person getDemoPerson() {
