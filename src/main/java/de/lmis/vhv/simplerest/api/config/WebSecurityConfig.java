@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
     private static final String CLIENT_ID="vertrags-ui";
 
+    private String[] allowedOrigins = {"http://localhost:8081","http://localhost:8082"};
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -63,18 +65,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .collect(Collectors.toList());
         return new JwtAuthenticationToken(jwt, authorities);
     }
-//
-//
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/**")
-//                .allowedMethods(
-//                        HttpMethod.GET.name(),
-//                        HttpMethod.POST.name(),
-//                        HttpMethod.DELETE.name(),
-//                        HttpMethod.PUT.name())
-//                .allowedOrigins(this.allowedOrigins)
-//                .exposedHeaders(HttpHeaders.LOCATION)
-//        ;
-//    }
+
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedMethods(
+                        HttpMethod.GET.name(),
+                        HttpMethod.POST.name(),
+                        HttpMethod.DELETE.name(),
+                        HttpMethod.PUT.name())
+                .allowedOrigins(this.allowedOrigins)
+                .exposedHeaders(HttpHeaders.LOCATION)
+        ;
+    }
 }

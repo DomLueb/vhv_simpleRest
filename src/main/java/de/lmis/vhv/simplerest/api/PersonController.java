@@ -4,6 +4,8 @@ import de.lmis.vhv.simplerest.business.PersonService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,5 +40,10 @@ public class PersonController {
                 .fn(person.getFirstName())
                 .ln(person.getLastName())
                 .build();
+    }
+
+    @PutMapping()
+    public void doSth() {
+        System.out.println("Do something");
     }
 }
