@@ -25,8 +25,6 @@ public class PersonController {
     @GetMapping
     @RolesAllowed("ADMIN")
     public List<PersonDTO> getAllPersons() {
-        var con=SecurityContextHolder.getContext();
-        var a=con.getAuthentication().getPrincipal();
         var persons = this.personService.getAllPersons();
         return persons.stream().map(p -> PersonDTO.builder()
                 .fn(p.getFirstName()).ln(p.getLastName()).build())
@@ -40,10 +38,5 @@ public class PersonController {
                 .fn(person.getFirstName())
                 .ln(person.getLastName())
                 .build();
-    }
-
-    @PutMapping()
-    public void doSth() {
-        System.out.println("Do something");
     }
 }

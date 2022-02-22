@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
-    private static final String CLIENT_ID="vertrags-ui";
+    private static final String CLIENT_ID="vertrags-service";
 
     private String[] allowedOrigins = {"http://localhost:8081","http://localhost:8082"};
 
@@ -53,9 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         List<String> roles = Collections.emptyList();
         Map<String, Object> resourceAccess = jwt.getClaim("resource_access");
         if (resourceAccess != null) {
-            Map<String, Object> assignedRolesInLogistikshopClient = (Map<String, Object>) resourceAccess.get(CLIENT_ID);
-            if (assignedRolesInLogistikshopClient != null) {
-                roles = (List<String>) assignedRolesInLogistikshopClient.get("roles");
+            var assignedRolesInService = (Map<String, List<String>>) resourceAccess.get(CLIENT_ID);
+            if (assignedRolesInService != null) {
+                roles = assignedRolesInService.get("roles");
             }
         }
 
@@ -65,7 +65,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .collect(Collectors.toList());
         return new JwtAuthenticationToken(jwt, authorities);
     }
-
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {

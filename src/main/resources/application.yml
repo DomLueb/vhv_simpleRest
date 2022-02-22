@@ -1,3 +1,6 @@
+logging:
+  level:
+    org.springframework.security: TRACE
 server:
   error:
     include-stacktrace: never
