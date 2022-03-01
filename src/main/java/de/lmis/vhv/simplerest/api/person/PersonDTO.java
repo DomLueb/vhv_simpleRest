@@ -1,4 +1,4 @@
-package de.lmis.vhv.simplerest.api;
+package de.lmis.vhv.simplerest.api.person;
 
 import lombok.Builder;
 import lombok.Value;

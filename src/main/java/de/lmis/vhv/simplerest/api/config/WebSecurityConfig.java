@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .and()
 
                 .authorizeRequests()
+                .mvcMatchers("contracts/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
 
@@ -78,4 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .exposedHeaders(HttpHeaders.LOCATION)
         ;
     }
+
+
+
 }

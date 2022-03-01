@@ -1,6 +1,6 @@
-logging:
-  level:
-    org.springframework.security: TRACE
+#logging:
+#  level:
+#    org.springframework.security: TRACE
 server:
   error:
     include-stacktrace: never
@@ -10,3 +10,7 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: https://koch-logistikshop.dev.lmis.de/auth/realms/vhv
+
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
